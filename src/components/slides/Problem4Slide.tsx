@@ -27,175 +27,46 @@ export const Problem4Slide = () => {
         </p>
       </motion.div>
 
-      {/* Rocket Visualization with 4 Floors */}
+      {/* Momentum Meter Visualization */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}
-        className="relative h-56 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
+        className="relative h-28 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
       >
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          {/* Rocket Container */}
-          <div className="relative flex items-end gap-8">
-            {/* Rocket */}
-            <motion.div 
-              className="relative"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              {/* Rocket Nose Cone */}
+        <div className="absolute inset-0 flex items-center justify-center px-8">
+          <div className="w-full max-w-md">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-slide-muted">Startup Momentum</span>
               <motion.div
-                className="w-24 h-12 mx-auto relative"
-                animate={{ y: [0, -2, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{ duration: 1.5, repeat: Infinity }}
               >
-                <svg viewBox="0 0 100 50" className="w-full h-full">
-                  <motion.path
-                    d="M50 0 L85 50 L15 50 Z"
-                    fill="url(#rocketGradient)"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.6, duration: 0.4 }}
-                  />
-                  <defs>
-                    <linearGradient id="rocketGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--slide-accent-glow))" />
-                      <stop offset="100%" stopColor="hsl(var(--slide-accent))" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                <Rocket className="w-5 h-5 text-slide-accent" />
               </motion.div>
-
-              {/* Rocket Body with 4 Floors */}
-              <motion.div 
-                className="flex flex-col-reverse"
-                animate={{ y: [0, -2, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+            </div>
+            <div className="h-4 bg-slide-card-border rounded-full overflow-hidden">
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "85%" }}
+                transition={{ delay: 0.5, duration: 1.2, ease: "easeOut" }}
+                className="h-full bg-gradient-to-r from-slide-accent to-slide-accent-glow relative"
               >
-                {/* Floor 4 - Momentum Builder (Top) */}
                 <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{ delay: 1.2, duration: 0.3 }}
-                  className="w-24 h-10 bg-gradient-to-b from-slide-accent to-slide-accent/80 flex items-center justify-center border-b border-slide-foreground/20 origin-bottom"
-                >
-                  <span className="text-[9px] font-bold text-slide-foreground text-center leading-tight px-1">Momentum Builder</span>
-                </motion.div>
-
-                {/* Floor 3 - Self-Management */}
-                <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{ delay: 1, duration: 0.3 }}
-                  className="w-24 h-10 bg-gradient-to-b from-slide-success to-slide-success/80 flex items-center justify-center border-b border-slide-foreground/20 origin-bottom"
-                >
-                  <span className="text-[9px] font-bold text-slide-foreground text-center leading-tight px-1">Self-Management</span>
-                </motion.div>
-
-                {/* Floor 2 - Proactive Communication */}
-                <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.3 }}
-                  className="w-24 h-10 bg-gradient-to-b from-slide-info to-slide-info/80 flex items-center justify-center border-b border-slide-foreground/20 origin-bottom"
-                >
-                  <span className="text-[9px] font-bold text-slide-foreground text-center leading-tight px-1">Proactive Comms</span>
-                </motion.div>
-
-                {/* Floor 1 - Deadline Commitment (Base) */}
-                <motion.div
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.3 }}
-                  className="w-24 h-10 bg-gradient-to-b from-slide-warning to-slide-warning/80 flex items-center justify-center rounded-b-lg origin-bottom"
-                >
-                  <span className="text-[9px] font-bold text-slide-foreground text-center leading-tight px-1">Deadline Commit</span>
-                </motion.div>
+                  animate={{ x: [0, 10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/20"
+                />
               </motion.div>
-
-              {/* Rocket Fins */}
-              <motion.div 
-                className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex justify-between w-32"
-                animate={{ y: [0, -2, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <div className="w-4 h-6 bg-slide-accent/60 skew-x-12 rounded-b" />
-                <div className="w-4 h-6 bg-slide-accent/60 -skew-x-12 rounded-b" />
-              </motion.div>
-
-              {/* Rocket Flames */}
-              <motion.div 
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2"
-                animate={{ scaleY: [1, 1.3, 1], opacity: [0.8, 1, 0.8] }}
-                transition={{ duration: 0.3, repeat: Infinity }}
-              >
-                <svg width="40" height="40" viewBox="0 0 40 40">
-                  <motion.ellipse
-                    cx="20" cy="10" rx="12" ry="18"
-                    fill="url(#flameGradient)"
-                  />
-                  <motion.ellipse
-                    cx="20" cy="15" rx="6" ry="12"
-                    fill="url(#flameInnerGradient)"
-                  />
-                  <defs>
-                    <linearGradient id="flameGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--slide-warning))" />
-                      <stop offset="100%" stopColor="transparent" />
-                    </linearGradient>
-                    <linearGradient id="flameInnerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--slide-foreground))" />
-                      <stop offset="100%" stopColor="hsl(var(--slide-warning))" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </motion.div>
-            </motion.div>
-
-            {/* Legend */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4 }}
-              className="space-y-2"
-            >
-              <div className="text-xs text-slide-muted font-medium mb-2">Ownership Mindset</div>
-              {[
-                { color: 'bg-slide-warning', label: '1. Deadline Commitment' },
-                { color: 'bg-slide-info', label: '2. Proactive Communication' },
-                { color: 'bg-slide-success', label: '3. Self-Management' },
-                { color: 'bg-slide-accent', label: '4. Momentum Builder' },
-              ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1.5 + i * 0.1 }}
-                  className="flex items-center gap-2"
-                >
-                  <div className={`w-3 h-3 rounded ${item.color}`} />
-                  <span className="text-xs text-slide-muted">{item.label}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+            </div>
+            <div className="flex justify-between mt-2">
+              <span className="text-xs text-slide-muted">Critical Growth Phase</span>
+              <span className="text-xs text-slide-accent font-medium">High Intensity</span>
+            </div>
           </div>
         </div>
-
-        {/* Stars/particles background */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0.2, 0.5, 0.2] }}
-            transition={{ delay: 0.5 + i * 0.2, duration: 2, repeat: Infinity }}
-            className="absolute w-1 h-1 rounded-full bg-slide-foreground/40"
-            style={{ 
-              left: `${10 + i * 12}%`, 
-              top: `${15 + (i % 3) * 25}%` 
-            }}
-          />
-        ))}
       </motion.div>
 
       {/* Ownership Badge */}
