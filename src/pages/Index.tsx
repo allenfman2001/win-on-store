@@ -12,6 +12,7 @@ import { Problem3DetailSlide } from "@/components/slides/Problem3DetailSlide";
 import { Problem4Slide } from "@/components/slides/Problem4Slide";
 import { Problem4DetailSlide } from "@/components/slides/Problem4DetailSlide";
 import { SummarySlide } from "@/components/slides/SummarySlide";
+import { ReferencesSlide } from "@/components/slides/ReferencesSlide";
 
 const slides = [
   { component: TitleSlide, key: "title" },
@@ -25,6 +26,7 @@ const slides = [
   { component: Problem4Slide, key: "problem4" },
   { component: Problem4DetailSlide, key: "problem4-detail" },
   { component: SummarySlide, key: "summary" },
+  { component: ReferencesSlide, key: "references" },
 ];
 
 const Index = () => {
