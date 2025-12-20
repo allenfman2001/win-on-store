@@ -67,18 +67,25 @@ const Index = () => {
 
   const CurrentSlideComponent = slides[currentSlide].component;
 
-  const slideVariants = {
+  // Morph-style transition variants
+  const morphVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
       opacity: 0,
+      scale: 0.96,
+      filter: "blur(4px)",
+      x: direction > 0 ? 60 : -60,
     }),
     center: {
-      x: 0,
       opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      x: 0,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
       opacity: 0,
+      scale: 1.02,
+      filter: "blur(4px)",
+      x: direction < 0 ? 60 : -60,
     }),
   };
 
@@ -89,6 +96,15 @@ const Index = () => {
       
       {/* Accent glow */}
       <div className="fixed top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-slide-accent/5 to-transparent pointer-events-none" />
+      
+      {/* Secondary glow */}
+      <motion.div 
+        animate={{ 
+          opacity: [0.03, 0.06, 0.03],
+        }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="fixed bottom-0 left-0 w-1/3 h-1/3 bg-gradient-radial from-slide-accent-glow/10 to-transparent pointer-events-none" 
+      />
 
       {/* Slide counter */}
       <motion.div
@@ -107,13 +123,15 @@ const Index = () => {
           <motion.div
             key={slides[currentSlide].key}
             custom={direction}
-            variants={slideVariants}
+            variants={morphVariants}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1],
+              opacity: { duration: 0.3 },
+              filter: { duration: 0.3 },
             }}
             className="absolute inset-0"
           >
