@@ -67,25 +67,26 @@ const Index = () => {
 
   const CurrentSlideComponent = slides[currentSlide].component;
 
-  // Morph-style transition variants
+  // PowerPoint/Keynote-style morph transition variants
+  // Creates a zoom-through effect where current slide scales up and fades while new slide scales from smaller
   const morphVariants = {
     enter: (direction: number) => ({
       opacity: 0,
-      scale: 0.96,
-      filter: "blur(4px)",
-      x: direction > 0 ? 60 : -60,
+      scale: direction > 0 ? 0.85 : 1.15,
+      rotateY: direction > 0 ? -5 : 5,
+      z: direction > 0 ? -100 : 100,
     }),
     center: {
       opacity: 1,
       scale: 1,
-      filter: "blur(0px)",
-      x: 0,
+      rotateY: 0,
+      z: 0,
     },
     exit: (direction: number) => ({
       opacity: 0,
-      scale: 1.02,
-      filter: "blur(4px)",
-      x: direction < 0 ? 60 : -60,
+      scale: direction > 0 ? 1.15 : 0.85,
+      rotateY: direction > 0 ? 5 : -5,
+      z: direction > 0 ? 100 : -100,
     }),
   };
 
@@ -117,8 +118,8 @@ const Index = () => {
         <span>{slides.length}</span>
       </motion.div>
 
-      {/* Main slide area */}
-      <div className="relative h-screen w-full max-w-7xl mx-auto">
+      {/* Main slide area with perspective for 3D morph effect */}
+      <div className="relative h-screen w-full max-w-7xl mx-auto" style={{ perspective: "1200px" }}>
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={slides[currentSlide].key}
@@ -128,12 +129,14 @@ const Index = () => {
             animate="center"
             exit="exit"
             transition={{
-              duration: 0.4,
-              ease: [0.4, 0, 0.2, 1],
-              opacity: { duration: 0.3 },
-              filter: { duration: 0.3 },
+              duration: 0.6,
+              ease: [0.32, 0.72, 0, 1],
+              opacity: { duration: 0.4, ease: "easeInOut" },
+              scale: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
+              rotateY: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
             }}
             className="absolute inset-0"
+            style={{ transformStyle: "preserve-3d" }}
           >
             <CurrentSlideComponent />
           </motion.div>
