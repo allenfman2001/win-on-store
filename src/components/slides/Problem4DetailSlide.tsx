@@ -1,5 +1,32 @@
 import { motion } from "framer-motion";
-import { MessageSquare, Calendar, Zap, Heart } from "lucide-react";
+import { Rocket, Target, Zap, Shield, CheckCircle } from "lucide-react";
+
+const ownershipPrinciples = [
+  {
+    icon: Target,
+    title: "Deadline Commitment",
+    description: "Deliverables are non-negotiable. I plan ahead and manage my energy to ensure consistent output during critical periods.",
+    color: "text-slide-accent",
+  },
+  {
+    icon: Zap,
+    title: "Proactive Communication",
+    description: "If I'm struggling, I communicate early—not to make excuses, but to find solutions. Surprises damage trust.",
+    color: "text-slide-warning",
+  },
+  {
+    icon: Shield,
+    title: "Self-Management",
+    description: "I optimize sleep, exercise, and nutrition during high-intensity periods. Peak performance requires preparation.",
+    color: "text-slide-success",
+  },
+  {
+    icon: Rocket,
+    title: "Momentum Builder",
+    description: "I understand that startup success is built in these exact moments. My contribution during tough phases compounds over time.",
+    color: "text-slide-info",
+  },
+];
 
 export const Problem4DetailSlide = () => {
   return (
@@ -9,90 +36,59 @@ export const Problem4DetailSlide = () => {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <span className="text-sm text-slide-accent font-medium mb-2 block">Problem 4 - Action Framework</span>
-        <h2 className="text-3xl font-bold text-slide-foreground mb-3">
-          Balancing Personal & Professional
-        </h2>
+        <motion.span 
+          layoutId="problem4-badge"
+          className="text-sm text-slide-accent font-medium mb-2 block"
+        >
+          Problem 4 - Execution Framework
+        </motion.span>
+        <motion.h2 
+          layoutId="problem4-title"
+          className="text-3xl font-bold text-slide-foreground mb-3"
+        >
+          Ownership Mindset
+        </motion.h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="p-6 rounded-xl bg-slide-card/60 border border-slide-card-border"
-        >
-          <h3 className="text-xl font-semibold text-slide-foreground mb-4 flex items-center gap-2">
-            <MessageSquare className="w-6 h-6 text-slide-accent" />
-            Communication Script
-          </h3>
-          <div className="p-4 rounded-lg bg-slide/50 border border-slide-card-border">
-            <p className="text-sm text-slide-muted italic leading-relaxed">
-              "I'm dealing with a personal matter that requires my attention. I want to be transparent because I respect this team. 
-              I've prepared [handoffs/coverage] and will be fully available by [date]. This will help me return at 100% capacity."
-            </p>
-          </div>
-          <div className="mt-4 space-y-2">
-            <div className="flex items-center gap-2 text-sm text-slide-muted">
-              <span className="w-2 h-2 rounded-full bg-slide-success" />
-              Be specific about timeline
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+        {ownershipPrinciples.map((principle, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + index * 0.15 }}
+            className="p-6 rounded-xl bg-slide-card/60 border border-slide-card-border hover:border-slide-accent/30 transition-all duration-300"
+          >
+            <div className="flex items-start gap-4">
+              <motion.div 
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className={`p-3 rounded-lg bg-slide-card border border-slide-card-border ${principle.color}`}
+              >
+                <principle.icon className="w-6 h-6" />
+              </motion.div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-slide-foreground mb-2">{principle.title}</h3>
+                <p className="text-sm text-slide-muted leading-relaxed">{principle.description}</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slide-muted">
-              <span className="w-2 h-2 rounded-full bg-slide-success" />
-              Show preparation & responsibility
-            </div>
-            <div className="flex items-center gap-2 text-sm text-slide-muted">
-              <span className="w-2 h-2 rounded-full bg-slide-success" />
-              Focus on return, not absence
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="space-y-4"
-        >
-          <div className="p-5 rounded-xl bg-slide-card/60 border border-slide-card-border">
-            <div className="flex items-center gap-3 mb-3">
-              <Calendar className="w-5 h-5 text-slide-info" />
-              <span className="font-medium text-slide-foreground">Before You Leave</span>
-            </div>
-            <ul className="text-sm text-slide-muted space-y-2">
-              <li>• Document all active projects status</li>
-              <li>• Brief a colleague on urgent items</li>
-              <li>• Set clear OOO response</li>
-            </ul>
-          </div>
-
-          <div className="p-5 rounded-xl bg-slide-card/60 border border-slide-card-border">
-            <div className="flex items-center gap-3 mb-3">
-              <Zap className="w-5 h-5 text-slide-warning" />
-              <span className="font-medium text-slide-foreground">When You Return</span>
-            </div>
-            <ul className="text-sm text-slide-muted space-y-2">
-              <li>• Quick sync with manager first</li>
-              <li>• Catch up on priorities only</li>
-              <li>• Deliver quick win to rebuild momentum</li>
-            </ul>
-          </div>
-        </motion.div>
+          </motion.div>
+        ))}
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.8 }}
         className="mt-6 p-5 rounded-xl bg-slide-accent/10 border border-slide-accent/30"
       >
-        <div className="flex items-center gap-4">
-          <Heart className="w-8 h-8 text-slide-accent" />
+        <div className="flex items-start gap-4">
+          <CheckCircle className="w-8 h-8 text-slide-accent flex-shrink-0" />
           <div>
-            <h4 className="font-semibold text-slide-foreground">The Bottom Line</h4>
+            <h4 className="font-semibold text-slide-foreground mb-2">My Commitment to OnStore</h4>
             <p className="text-sm text-slide-muted">
-              A demanding boss with high expectations will respect honesty and self-awareness more than silent struggle. 
-              Your long-term value to OnStore depends on your wellbeing.
+              I recognize that joining a fast-moving startup means embracing intensity during critical growth phases. 
+              I take ownership of my projects and deliverables. When challenges arise, I lean in—not back. 
+              This builds the trust and track record that earns future flexibility.
             </p>
           </div>
         </div>
