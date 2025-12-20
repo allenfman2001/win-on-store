@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SlideNavigation } from "@/components/SlideNavigation";
+import { SlideActions } from "@/components/SlideActions";
 import { TitleSlide } from "@/components/slides/TitleSlide";
 import { AgendaSlide } from "@/components/slides/AgendaSlide";
 import { Problem1Slide } from "@/components/slides/Problem1Slide";
@@ -13,7 +14,6 @@ import { Problem4Slide } from "@/components/slides/Problem4Slide";
 import { Problem4DetailSlide } from "@/components/slides/Problem4DetailSlide";
 import { SummarySlide } from "@/components/slides/SummarySlide";
 import { ReferencesSlide } from "@/components/slides/ReferencesSlide";
-
 const slides = [
   { component: TitleSlide, key: "title" },
   { component: AgendaSlide, key: "agenda" },
@@ -108,6 +108,9 @@ const Index = () => {
         transition={{ duration: 4, repeat: Infinity }}
         className="fixed bottom-0 left-0 w-1/3 h-1/3 bg-gradient-radial from-slide-accent-glow/10 to-transparent pointer-events-none" 
       />
+
+      {/* Slide actions */}
+      <SlideActions />
 
       {/* Slide counter */}
       <motion.div
