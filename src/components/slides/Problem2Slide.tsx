@@ -27,41 +27,98 @@ export const Problem2Slide = () => {
         </p>
       </motion.div>
 
-      {/* Revenue Comparison Visualization */}
+      {/* Extension Strategy Bar Visualization */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}
-        className="relative h-24 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
+        className="relative h-32 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
       >
-        <div className="absolute inset-0 flex items-center justify-center gap-8 px-8">
-          <div className="flex-1 flex items-center gap-4">
-            <div className="text-center">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="h-8 bg-gradient-to-r from-slide-success/60 to-slide-success rounded-lg flex items-center justify-end pr-2"
-                style={{ width: '160px' }}
-              >
-                <span className="text-xs font-medium text-slide-foreground">Extend: Low Risk</span>
-              </motion.div>
-              <span className="text-xs text-slide-muted mt-1">Guaranteed revenue</span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-8 py-4">
+          <div className="w-full max-w-xl">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm text-slide-foreground font-medium">Campaign Extension Timeline</span>
+              <span className="text-xs text-slide-accent">30 Days Remaining</span>
             </div>
-          </div>
-          <DollarSign className="w-8 h-8 text-slide-accent" />
-          <div className="flex-1 flex items-center gap-4">
-            <div className="text-center">
+            
+            {/* Extension bar with segments */}
+            <div className="relative h-12 bg-slide-card-border/50 rounded-xl overflow-hidden">
+              {/* Current campaign segment */}
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-                className="h-8 bg-gradient-to-r from-slide-warning to-slide-warning/60 rounded-lg flex items-center justify-start pl-2"
-                style={{ width: '200px' }}
+                transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-slide-success/40 to-slide-success/20 rounded-l-xl"
+              />
+              
+              {/* Extension segment with glow effect */}
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "60%", opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+                className="absolute left-[100%] top-0 h-full flex items-center"
+                style={{ transform: 'translateX(-100%)' }}
               >
-                <span className="text-xs font-medium text-slide-foreground">Resell: Higher Potential</span>
+                <div className="h-full w-full bg-gradient-to-r from-slide-accent/60 via-slide-accent to-slide-accent-glow relative overflow-hidden rounded-r-xl">
+                  <motion.div
+                    animate={{ x: ['-100%', '200%'] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  />
+                </div>
               </motion.div>
-              <span className="text-xs text-slide-muted mt-1">Variable outcome</span>
+
+              {/* Labels inside bar */}
+              <div className="absolute inset-0 flex items-center justify-between px-4">
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5 }}
+                  className="text-xs text-slide-foreground font-medium z-10"
+                >
+                  Current: 30 Assets
+                </motion.span>
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2 }}
+                  className="text-xs text-slide-foreground font-medium z-10 flex items-center gap-1"
+                >
+                  <TrendingUp className="w-3 h-3" />
+                  +6 Month Extension
+                </motion.span>
+              </div>
+            </div>
+
+            {/* Stats below bar */}
+            <div className="flex justify-between mt-3">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.8 }}
+                className="flex items-center gap-2"
+              >
+                <div className="w-3 h-3 rounded-full bg-slide-success/60" />
+                <span className="text-xs text-slide-muted">Guaranteed Revenue</span>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2 }}
+                className="flex items-center gap-2"
+              >
+                <div className="w-3 h-3 rounded-full bg-slide-accent" />
+                <span className="text-xs text-slide-muted">10% Discount Incentive</span>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.2 }}
+                className="flex items-center gap-2"
+              >
+                <DollarSign className="w-3 h-3 text-slide-success" />
+                <span className="text-xs text-slide-success font-medium">93% Retention</span>
+              </motion.div>
             </div>
           </div>
         </div>

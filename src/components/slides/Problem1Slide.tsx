@@ -35,64 +35,124 @@ export const Problem1Slide = () => {
         </p>
       </motion.div>
 
-      {/* Animated Map Visualization */}
+      {/* US Map Visualization */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2 }}
-        className="relative h-32 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
+        className="relative h-48 mb-6 rounded-xl bg-slide-card/40 border border-slide-card-border overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-slide-accent/5 via-transparent to-slide-accent/5" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-full h-full max-w-md">
-            {cities.map((city, index) => (
-              <motion.div
-                key={city.name}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                className="absolute flex flex-col items-center"
-                style={{ left: `${city.x}%`, top: `${city.y}%`, transform: 'translate(-50%, -50%)' }}
-              >
-                <motion.div
-                  animate={{ 
-                    boxShadow: ['0 0 0 0 rgba(168, 85, 247, 0.4)', '0 0 0 12px rgba(168, 85, 247, 0)', '0 0 0 0 rgba(168, 85, 247, 0)']
-                  }}
-                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                  className="w-3 h-3 rounded-full bg-slide-accent"
-                />
-                <span className="text-[10px] text-slide-muted mt-1 whitespace-nowrap">{city.name}</span>
-              </motion.div>
-            ))}
-            <motion.div
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <svg viewBox="0 0 960 600" className="w-full h-full max-w-2xl" style={{ filter: 'drop-shadow(0 0 10px hsl(var(--slide-accent) / 0.3))' }}>
+            {/* Simplified US Map outline */}
+            <motion.path
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.3 }}
+              transition={{ duration: 2, ease: "easeInOut" }}
+              d="M158 130 L220 125 L295 118 L310 115 L360 115 L400 115 L420 110 L470 105 L520 105 L565 110 L600 115 L640 120 L680 125 L720 130 L760 135 L800 140 L830 155 L850 180 L855 220 L850 260 L840 300 L820 340 L800 370 L780 400 L750 430 L720 455 L680 475 L640 490 L600 495 L560 495 L520 490 L480 480 L440 465 L400 445 L360 420 L320 390 L280 360 L240 330 L200 300 L170 270 L150 240 L140 210 L140 180 L150 150 Z"
+              fill="none"
+              stroke="hsl(var(--slide-accent))"
+              strokeWidth="2"
+            />
+            {/* Southeast region highlight */}
+            <motion.ellipse
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.15 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              cx="680"
+              cy="380"
+              rx="150"
+              ry="100"
+              fill="hsl(var(--slide-accent))"
+            />
+            
+            {/* City markers with labels */}
+            {/* Atlanta */}
+            <motion.g initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.2 }}>
+              <motion.circle
+                animate={{ r: [8, 12, 8], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                cx="655"
+                cy="340"
+                fill="hsl(var(--slide-accent))"
+              />
+              <circle cx="655" cy="340" r="4" fill="hsl(var(--slide-foreground))" />
+              <text x="655" y="320" textAnchor="middle" className="fill-slide-foreground text-xs font-medium">Atlanta</text>
+            </motion.g>
+
+            {/* Miami */}
+            <motion.g initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.4 }}>
+              <motion.circle
+                animate={{ r: [8, 12, 8], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+                cx="720"
+                cy="470"
+                fill="hsl(var(--slide-accent))"
+              />
+              <circle cx="720" cy="470" r="4" fill="hsl(var(--slide-foreground))" />
+              <text x="720" y="495" textAnchor="middle" className="fill-slide-foreground text-xs font-medium">Miami</text>
+            </motion.g>
+
+            {/* Tampa */}
+            <motion.g initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.6 }}>
+              <motion.circle
+                animate={{ r: [8, 12, 8], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                cx="680"
+                cy="430"
+                fill="hsl(var(--slide-accent))"
+              />
+              <circle cx="680" cy="430" r="4" fill="hsl(var(--slide-foreground))" />
+              <text x="650" y="445" textAnchor="middle" className="fill-slide-foreground text-xs font-medium">Tampa</text>
+            </motion.g>
+
+            {/* Raleigh */}
+            <motion.g initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1.8 }}>
+              <motion.circle
+                animate={{ r: [8, 12, 8], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.9 }}
+                cx="730"
+                cy="300"
+                fill="hsl(var(--slide-accent))"
+              />
+              <circle cx="730" cy="300" r="4" fill="hsl(var(--slide-foreground))" />
+              <text x="760" y="290" textAnchor="start" className="fill-slide-foreground text-xs font-medium">Raleigh</text>
+            </motion.g>
+
+            {/* Durham */}
+            <motion.g initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2 }}>
+              <motion.circle
+                animate={{ r: [8, 12, 8], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
+                cx="720"
+                cy="285"
+                fill="hsl(var(--slide-accent))"
+              />
+              <circle cx="720" cy="285" r="4" fill="hsl(var(--slide-foreground))" />
+              <text x="690" y="275" textAnchor="end" className="fill-slide-foreground text-xs font-medium">Durham</text>
+            </motion.g>
+
+            {/* Connecting lines between cities */}
+            <motion.path
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ delay: 0.8, duration: 1.5 }}
-              className="absolute inset-0"
-            >
-              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
-                <motion.path
-                  d="M65 45 L72 78 L68 68"
-                  stroke="url(#gradient)"
-                  strokeWidth="0.5"
-                  strokeDasharray="2 2"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 1, duration: 1.5 }}
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="hsl(var(--slide-accent))" />
-                    <stop offset="100%" stopColor="hsl(var(--slide-accent-glow))" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </motion.div>
-          </div>
+              transition={{ delay: 2.2, duration: 1 }}
+              d="M655 340 L680 430 M680 430 L720 470 M655 340 L720 285 M720 285 L730 300"
+              stroke="hsl(var(--slide-accent))"
+              strokeWidth="1"
+              strokeDasharray="4 4"
+              fill="none"
+              opacity="0.5"
+            />
+          </svg>
         </div>
         <div className="absolute bottom-2 left-4 flex items-center gap-2 text-xs text-slide-muted">
           <MapPin className="w-3 h-3 text-slide-accent" />
-          <span>Geographic concentration strategy</span>
+          <span>Southeast US Focus: 5 Target Cities</span>
+        </div>
+        <div className="absolute bottom-2 right-4 text-xs text-slide-accent font-medium">
+          150 Stores Target
         </div>
       </motion.div>
 
