@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Link, Check, Loader2 } from "lucide-react";
+import { Link, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export const SlideActions = () => {
-  const [isExporting, setIsExporting] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = async () => {
@@ -19,22 +18,12 @@ export const SlideActions = () => {
     }
   };
 
-  const handleExportPDF = async () => {
-    setIsExporting(true);
-    toast.info("Opening print dialog... Use 'Save as PDF' to download.");
-
-    setTimeout(() => {
-      window.print();
-      setIsExporting(false);
-    }, 500);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
-      className="fixed top-6 left-8 z-50 flex items-center gap-2"
+      className="fixed top-6 left-8 z-50"
     >
       <Button
         variant="outline"
@@ -64,21 +53,6 @@ export const SlideActions = () => {
           )}
         </AnimatePresence>
         {copied ? "Copied!" : "Share"}
-      </Button>
-
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleExportPDF}
-        disabled={isExporting}
-        className="bg-slide-card/80 backdrop-blur-sm border-slide-border/50 text-slide-foreground hover:bg-slide-card hover:border-slide-accent/50 gap-2"
-      >
-        {isExporting ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
-        ) : (
-          <Download className="w-4 h-4" />
-        )}
-        {isExporting ? "Loading..." : "Download"}
       </Button>
     </motion.div>
   );
